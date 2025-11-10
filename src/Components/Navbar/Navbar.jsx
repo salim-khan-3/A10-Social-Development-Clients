@@ -54,7 +54,7 @@ const Navbar = () => {
             </Link>
 
             <Link
-              to="/events"
+              to="/upcoming"
               className="hidden md:block text-gray-700 hover:text-blue-600 transition-colors font-medium"
             >
               Upcoming Events
@@ -155,7 +155,7 @@ const Navbar = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden border-t border-gray-200 pt-4 pb-3">
             <Link
-              to="/events"
+              to="/upcoming"
               className="block px-4 py-2 text-gray-700 hover:bg-gray-100 font-medium"
               onClick={() => setIsMobileMenuOpen(false)}
             >

@@ -7,6 +7,7 @@ import CreateEvent from "../Pages/CreateEvent/CreateEvent";
 import PrivateRoute from "../PrivateRoutes/PrivateRoutes";
 import ManageEvents from "../Pages/ManageEvents/ManageEvents";
 import JoinedEvents from "../Pages/JoinedEvents/JoinedEvents";
+import UpcomingEvents from "../Pages/UpcomingEvents/UpcomingEvents";
 
 export const router = createBrowserRouter([
   {
@@ -45,6 +46,11 @@ export const router = createBrowserRouter([
         <PrivateRoute>
           <JoinedEvents></JoinedEvents>
         </PrivateRoute>
+      },
+      {
+        path:"upcoming",
+        loader:()=> fetch("http://localhost:3000/events"),
+        Component:UpcomingEvents
       }
     ]
   },
