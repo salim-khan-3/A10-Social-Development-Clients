@@ -8,6 +8,7 @@ import PrivateRoute from "../PrivateRoutes/PrivateRoutes";
 import ManageEvents from "../Pages/ManageEvents/ManageEvents";
 import JoinedEvents from "../Pages/JoinedEvents/JoinedEvents";
 import UpcomingEvents from "../Pages/UpcomingEvents/UpcomingEvents";
+import EventDetails from "../Pages/EventDetails/EventDetails";
 
 export const router = createBrowserRouter([
   {
@@ -38,7 +39,7 @@ export const router = createBrowserRouter([
         element:
         <PrivateRoute>
           <ManageEvents></ManageEvents>
-        </PrivateRoute>
+        </PrivateRoute>,
       },
       {
         path:"join",
@@ -51,6 +52,11 @@ export const router = createBrowserRouter([
         path:"upcoming",
         loader:()=> fetch("http://localhost:3000/events"),
         Component:UpcomingEvents
+      },
+      {
+        path:"/eventdetails/:id",
+        loader:({params})=> fetch(`http://localhost:3000/events/${params.id}`),
+        Component:EventDetails
       }
     ]
   },

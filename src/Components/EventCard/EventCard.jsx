@@ -1,15 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React from "react";
+import { Link } from "react-router";
 
-const EventCard = ({event}) => {
+const EventCard = ({ event }) => {
   console.log(event);
-    return (
-<div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
-      <img
-        src={event.thumbnail}
-        alt=""
-        className="w-full h-48 object-cover"
-      />
+  return (
+    <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+      <img src={event.thumbnail} alt="" className="w-full h-48 object-cover" />
       <div className="p-5">
         <div className="flex items-center gap-2 mb-2">
           <span className="text-xs font-semibold text-emerald-600 bg-emerald-100 px-3 py-1 rounded-full">
@@ -27,15 +23,12 @@ const EventCard = ({event}) => {
           Date: {event.eventDate}
         </p>
 
-        <Link
-          
-          className="block w-full text-center bg-emerald-600 text-white py-2 rounded-lg font-semibold hover:bg-emerald-700 transition"
-        >
+        <Link to={`/eventdetails/${event._id}`} className="block w-full text-center bg-emerald-600 text-white py-2 rounded-lg font-semibold hover:bg-emerald-700 transition">
           View Event
         </Link>
       </div>
     </div>
-    );
+  );
 };
 
 export default EventCard;

@@ -28,7 +28,7 @@ const CreateEvent = () => {
     .then(res => res.json())
     .then(data=> console.log(data))
      .catch(() => toast.error("Failed to create event"));
-    console.log("Form Data:", formData);
+    // console.log("Form Data:", formData);
   };
 
   return (
