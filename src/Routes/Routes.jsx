@@ -9,6 +9,7 @@ import ManageEvents from "../Pages/ManageEvents/ManageEvents";
 import JoinedEvents from "../Pages/JoinedEvents/JoinedEvents";
 import UpcomingEvents from "../Pages/UpcomingEvents/UpcomingEvents";
 import EventDetails from "../Pages/EventDetails/EventDetails";
+import UpdateEvent from "../Pages/UpdateEvent/UpdateEvent";
 
 export const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ export const router = createBrowserRouter([
         path:"/eventdetails/:id",
         loader:({params})=> fetch(`http://localhost:3000/events/${params.id}`),
         Component:EventDetails
+      },
+      {
+        path:"/updateevent/:id",
+        Component:UpdateEvent
       }
     ]
   },

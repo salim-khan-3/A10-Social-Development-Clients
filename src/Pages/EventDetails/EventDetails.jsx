@@ -2,38 +2,16 @@
 import { useLoaderData, useNavigate } from "react-router";
 import { AuthContext } from "../../Context/AuthContext";
 import toast from "react-hot-toast";
-import { use, useEffect, useState } from "react";
+import { use } from "react";
 
 const EventDetails = () => {
   const data = useLoaderData();
   const navigate = useNavigate();
   const { user } = use(AuthContext);
-  const [hasJoined, setHasJoined] = useState(false);
-  const [loading, setLoading] = useState(true);
 
   console.log("EventDetails data:", data);
 
-  useEffect(() => {
-    if (!user || !data._id) {
-      setLoading(false);
-      return;
-    }
-
-    fetch(`http://localhost:3000/join_event/${user.email}`)
-      .then((res) => res.json())
-      .then((events) => {
-        const joined = events.some((e) => e.eventId === String(data._id));
-        setHasJoined(joined);
-        setLoading(false);
-      })
-      .catch(() => {
-        setHasJoined(false);
-        setLoading(false);
-      });
-  }, [user, data._id]);
-
   const handleJoinEvent = async () => {
-    //  Check if user is logged in
     if (!user) {
       toast.error("Please log in to join this event");
       navigate("/login");
@@ -48,39 +26,37 @@ const EventDetails = () => {
       location: data.location,
       eventDate: data.eventDate,
       userEmail: user.email,
-      eventId: String(data._id),
+      eventId: String(data._id), 
     };
 
- try {
-    const res = await fetch("http://localhost:3000/join_event", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(joinData),
-    });
+    try {
+      const res = await fetch(`http://localhost:3000/join_event/${user.email}`);
+      const joinedEvents = await res.json();
 
-    if (res.ok) {
-      toast.success("সফলভাবে জয়েন হয়েছে!");
-      setHasJoined(true);
-    } else if (res.status === 409) {
-      const errorData = await res.json();
-      toast.error(errorData.message || "Already joined this event!");
-      setHasJoined(true); // ensure button disables
-    } else {
-      toast.error("সার্ভারে সমস্যা হয়েছে");
+      const alreadyJoined = joinedEvents.some(
+        (event) => event.eventId === data._id
+      );
+
+      if (alreadyJoined) {
+        toast.error("You have already joined this event!");
+        return;
+      }
+
+      const joinRes = await fetch("http://localhost:3000/join_event", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(joinData),
+      });
+
+      if (joinRes.ok) {
+        toast.success("Successfully joined the event!");
+      } else {
+        toast.error("Failed to join event. Try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Something went wrong!");
     }
-  } catch (err) {
-    toast.error("সার্ভারে সমস্যা হয়েছে");
-    console.error(err);
-  }
-
-    // fetch("http://localhost:3000/join_event", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(joinData),
-    // })
-    //   .then(res => res.json())
-    //   .then(() => toast.success("You joined this event!"))
-    //   .catch(() => toast.error("Failed to join event"));
   };
 
   const formattedDate = new Date(data.eventDate).toLocaleDateString("en-GB", {
@@ -138,14 +114,9 @@ const EventDetails = () => {
           {/* Join Event Button */}
           <button
             onClick={handleJoinEvent}
-            disabled={hasJoined || loading}
-            className={`mt-8 w-full md:w-auto px-8 py-3 rounded-xl font-semibold transition duration-300 ${
-              hasJoined || loading
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-emerald-600 text-white hover:bg-emerald-700"
-            }`}
+            className="bg-emerald-600 px-8 py-4 rounded-full text-white hover:bg-emerald-700"
           >
-            {hasJoined ? "Already Joined" : "Join Event"}
+            Join Event
           </button>
         </div>
       </div>
