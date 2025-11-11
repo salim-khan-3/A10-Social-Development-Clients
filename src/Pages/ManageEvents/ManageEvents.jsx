@@ -1,5 +1,5 @@
 import React, { use, useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router";
 import { AuthContext } from "../../Context/AuthContext";
 import toast from "react-hot-toast";
 
@@ -114,12 +114,12 @@ const ManageEvents = () => {
 
                 {/* Action Buttons */}
                 <div className="flex gap-2 mt-4">
-                  <button
-                    onClick={() => navigate(`/updateevent/${event._id}`)}
-                    className="flex-1 cursor-pointer bg-blue-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition"
+                  <Link to={`/updateevent/${event._id}`}
+                    // onClick={() => navigate(``)}
+                    className="flex-1 text-center cursor-pointer bg-blue-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition"
                   >
                     Update
-                  </button>
+                  </Link>
                   <button className="flex-1 bg-red-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition">
                     Delete
                   </button>

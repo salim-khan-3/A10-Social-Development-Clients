@@ -61,7 +61,8 @@ export const router = createBrowserRouter([
       },
       {
         path:"/updateevent/:id",
-        Component:UpdateEvent
+        Component:UpdateEvent,
+        loader:({params})=> fetch(`http://localhost:3000/events/${params.id}`)
       }
     ]
   },
