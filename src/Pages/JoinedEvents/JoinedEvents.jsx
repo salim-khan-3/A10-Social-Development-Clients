@@ -15,7 +15,10 @@ const JoinedEvents = () => {
     fetch(`http://localhost:3000/join_event/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
-        setJoinedEvents(data);
+        const sortedData = data.sort(
+          (a, b) => new Date(a.eventDate) - new Date(b.eventDate)
+        );
+        setJoinedEvents(sortedData);
         setLoading(false);
       })
       .catch((err) => {
@@ -44,8 +47,8 @@ const JoinedEvents = () => {
   }
 
   return (
-    <div className=" bg-gray-50 py-10 md:py-20 px-4 md:px-10">
-      <h1 className="text-3xl font-bold text-center mb-10 text-gray-800">
+    <div className="  py-10 md:py-20 px-4 md:px-10">
+      <h1 className="text-2xl font-bold text-center mb-6  dark:text-white text-gray-900">
         My Joined Events
       </h1>
 
@@ -53,7 +56,7 @@ const JoinedEvents = () => {
         {joinedEvents.map((event) => (
           <div
             key={event._id}
-            className="bg-white rounded-2xl shadow-md overflow-hidden transition-transform duration-300 hover:scale-[1.02]"
+            className="bg-white dark:text-black rounded-2xl shadow-md overflow-hidden transition-transform duration-300 hover:scale-[1.02]"
           >
             <img
               src={event.thumbnail}
@@ -72,7 +75,7 @@ const JoinedEvents = () => {
                   year: "numeric",
                 })}
               </p>
-              <p>{user.email}</p>
+              <p className="">{user.email}</p>
             </div>
           </div>
         ))}

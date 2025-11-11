@@ -126,7 +126,7 @@ const Login = () => {
                     return;
                   }
 
-                  navigate("/auth/forget-password", {
+                  navigate("/forgetpassword", {
                     state: { email: emailInput },
                   });
                 }}

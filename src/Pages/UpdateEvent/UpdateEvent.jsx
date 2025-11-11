@@ -24,15 +24,18 @@ const UpdateEvent = () => {
       body: JSON.stringify(formData),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data);
+         toast.success("Event updated successfully!");
+      })
       .catch(() => toast.error("Failed to update event"));
   };
 
 
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10 px-4 md:px-8">
-      <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-8">
+    <div className="min-h-screen py-10 px-4 md:px-8">
+      <div className="max-w-3xl mx-auto bg-white dark:text-black rounded-2xl shadow-lg p-8">
         <h1 className="text-2xl font-bold mb-6 text-gray-800">Update Event</h1>
 
         <form onSubmit={handleSubmit} className="space-y-7">
@@ -76,21 +79,25 @@ const UpdateEvent = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Event Type Select */}
             <div>
-              <label
-                htmlFor="type"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Event Type
-              </label>
-              <input
-                type="text"
-                name="eventType"
-                placeholder="Event Type"
-                defaultValue={data.eventType}
-                className="w-full border px-4 py-2 rounded-lg"
-                required
-              />
-            </div>
+                <label
+                  htmlFor="type"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Event Type
+                </label>
+                <select
+                  name="eventType"
+                  defaultValue={data.eventType}
+                  id="type"
+                  className="w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-emerald-500 focus:border-emerald-500 appearance-none bg-white transition duration-150 ease-in-out"
+                >
+                  <option value="Cleanup">Cleanup</option>
+                  <option value="Plantation">Plantation</option>
+                  <option value="Donation">Donation</option>
+                  <option value="Education">Education</option>
+                  <option value="Health Camp">Health Camp</option>
+                </select>
+              </div>
 
             {/* Location Input */}
             <div>

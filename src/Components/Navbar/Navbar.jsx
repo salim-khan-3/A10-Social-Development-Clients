@@ -8,9 +8,20 @@ import toast from 'react-hot-toast';
 const Navbar = () => {
   const { user, logOut, loading } = useContext(AuthContext);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [theme,setTheme] = useState(localStorage.getItem("theme") || "light")
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    const html = document.querySelector("html")
+    html.setAttribute("data-theme",theme)
+    localStorage.setItem("theme",theme)
+  },[theme])
+
+  const handleTheme = (checked) => {
+    setTheme(checked?"dark": "light")
+  }
 
   const handleLogout = async () => {
     try {
@@ -38,7 +49,7 @@ const Navbar = () => {
   if (loading) return null;
 
   return (
-    <nav className="bg-white shadow-md max-w-7xl mx-auto sticky top-0 z-50">
+    <nav className="bg-white dark:text-black shadow-md max-w-7xl mx-auto sticky top-0 z-50">
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
 
@@ -128,6 +139,8 @@ const Navbar = () => {
                         <FaCalendarAlt className="w-4 h-4 mr-2" />
                         Joined Events
                       </Link>
+
+                      <input onChange={(e)=> handleTheme(e.target.checked)} defaultChecked={localStorage.getItem("theme") === "dark"} type="checkbox" className='toggle' />
                     </div>
                   )}
                 </>
@@ -146,7 +159,7 @@ const Navbar = () => {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="md:hidden p-2 rounded-md hover:bg-gray-100"
             >
-              {isMobileMenuOpen ? <FaTimes className="w-6 h-6" /> : <FaBars className="w-6 h-6" />}
+              {isMobileMenuOpen ? <FaTimes className="w-6 h-6" /> : <FaBars className="w-6 h-6 block" />}
             </button>
           </div>
         </div>

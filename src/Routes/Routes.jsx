@@ -10,6 +10,7 @@ import JoinedEvents from "../Pages/JoinedEvents/JoinedEvents";
 import UpcomingEvents from "../Pages/UpcomingEvents/UpcomingEvents";
 import EventDetails from "../Pages/EventDetails/EventDetails";
 import UpdateEvent from "../Pages/UpdateEvent/UpdateEvent";
+import ForgetPassword from "../Pages/ForgetPassword/ForgetPassword";
 
 export const router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ export const router = createBrowserRouter([
         path:"/updateevent/:id",
         Component:UpdateEvent,
         loader:({params})=> fetch(`http://localhost:3000/events/${params.id}`)
+      },
+      {
+        path:"forgetpassword",
+        Component: ForgetPassword
       }
     ]
   },

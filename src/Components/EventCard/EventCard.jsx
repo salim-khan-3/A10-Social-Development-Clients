@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router";
 
 const EventCard = ({ event }) => {
-  console.log(event);
+  console.log(event.eventDate);
   return (
     <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
       <img src={event.thumbnail} alt="" className="w-full h-48 object-cover" />

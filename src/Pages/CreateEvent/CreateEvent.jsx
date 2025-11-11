@@ -3,10 +3,12 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { AuthContext } from "../../Context/AuthContext";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 const CreateEvent = () => {
   const { user } = use(AuthContext);
   const [selectedDate, setSelectedDate] = useState(null);
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -26,7 +28,11 @@ const CreateEvent = () => {
       body: JSON.stringify(formData),
     })
     .then(res => res.json())
-    .then(data=> console.log(data))
+    .then(data=> {
+      console.log(data)
+       toast.success("Event created successfully!");
+       navigate("/upcoming");
+    })
      .catch(() => toast.error("Failed to create event"));
     // console.log("Form Data:", formData);
   };
@@ -34,7 +40,7 @@ const CreateEvent = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br py-10">
       <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto bg-white p-10 md:p-12 rounded-2xl shadow-2xl border border-gray-100">
+        <div className="max-w-3xl mx-auto bg-white dark:text-black p-10 md:p-12 rounded-2xl shadow-2xl border border-gray-100">
           <h1 className="text-4xl font-extrabold text-center mb-10 text-emerald-700">
             🌳 Create a New Impact Event
           </h1>
