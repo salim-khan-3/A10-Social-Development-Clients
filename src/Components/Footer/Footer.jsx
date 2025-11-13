@@ -29,7 +29,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gray-900 mt-10 text-gray-700 dark:text-gray-300 pt-12 pb-6 transition-colors duration-500">
+    <footer className="bg-gray-900 mt-10 text-gray-700 dark:text-white pt-12 pb-6 transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
 
         {/* Brand / Logo Section */}
