@@ -31,7 +31,6 @@ const ManageEvents = () => {
       });
   }, [user]);
 
-  // ✅ handle delete event with SweetAlert2
   const handleDelete = async (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -100,9 +99,9 @@ const ManageEvents = () => {
   }
 
   return (
-    <div className="min-h-screen  py-10 px-4 md:px-8">
+    <div className="py-10 px-4 md:px-8">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl md:text-4xl font-bold text-center mb-10 text-gray-900 dark:text-white">
+        <h1 className="text-3xl md:text-4xl font-bold text-center mb-10 text-cyan-400">
           My created events
         </h1>
 

@@ -163,7 +163,7 @@ const JoinedEvents = () => {
 
   return (
     <div className="py-10 md:py-20 px-4 md:px-10">
-      <h1 className="text-2xl font-bold text-center mb-6 bg-white dark:text-black">
+      <h1 className=" font-bold text-center mb-6 text-4xl text-cyan-400">
         My Joined Events
       </h1>
 

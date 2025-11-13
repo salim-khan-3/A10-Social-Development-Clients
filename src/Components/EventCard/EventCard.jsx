@@ -1,15 +1,31 @@
 import { Link } from "react-router";
+import { motion } from "framer-motion";
 
 const EventCard = ({ event }) => {
-  console.log(event.eventDate);
   return (
-    <div className="bg-white dark:text-black rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
-      <img src={event.thumbnail} alt="" className="w-full h-48 object-cover" />
+    <motion.div
+      className="bg-white dark:text-black rounded-xl shadow-md overflow-hidden"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      whileHover={{ scale: 1.03, boxShadow: "0px 15px 25px rgba(0, 0, 0, 0.2)" }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
+      <motion.img
+        src={event.thumbnail}
+        alt=""
+        className="w-full h-48 object-cover"
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.5 }}
+      />
       <div className="p-5">
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-xs font-semibold text-emerald-600 bg-emerald-100 px-3 py-1 rounded-full">
+          <motion.span
+            className="text-xs font-semibold text-emerald-600 bg-emerald-100 px-3 py-1 rounded-full"
+            whileHover={{ scale: 1.1 }}
+            transition={{ duration: 0.3 }}
+          >
             {event.eventType}
-          </span>
+          </motion.span>
           <span className="text-xs text-gray-500">{event.location}</span>
         </div>
 
@@ -26,7 +42,7 @@ const EventCard = ({ event }) => {
           })}
         </p>
 
-        <p>{event.createdBy}</p>
+        <p className="my-5">{event.createdBy}</p>
 
         <Link
           to={`/eventdetails/${event._id}`}
@@ -35,7 +51,7 @@ const EventCard = ({ event }) => {
           View Event
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

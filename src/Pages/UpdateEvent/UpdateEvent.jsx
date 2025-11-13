@@ -1,7 +1,10 @@
+import { use } from "react";
 import toast from "react-hot-toast";
 import { useLoaderData } from "react-router";
+import { AuthContext } from "../../Context/AuthContext";
 
 const UpdateEvent = () => {
+  const {user} = use(AuthContext)
   const data = useLoaderData();
   // console.log(data);
   // const { user } = use(AuthContext);
@@ -22,7 +25,10 @@ const UpdateEvent = () => {
 
     fetch(`https://social-developments-server.vercel.app/events/${data._id}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${user.accessToken}`,
+      },
       body: JSON.stringify(formData),
     })
       .then((res) => res.json())

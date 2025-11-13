@@ -90,7 +90,7 @@ const EventDetails = () => {
   }
 
   return (
-<div className="min-h-screen py-10 px-4 md:px-10 bg-gradient-to-br from-emerald-50 via-white to-emerald-100">
+<div className="py-10 px-4 md:px-10 bg-gradient-to-br from-emerald-50 via-white to-emerald-100">
   <div className="max-w-5xl mx-auto flex flex-col md:flex-row bg-white dark:bg-gray-900 rounded-3xl shadow-2xl overflow-hidden transform transition-all duration-500 hover:shadow-emerald-200 hover:-translate-y-1">
     
     {/* Thumbnail */}
@@ -155,3 +155,5 @@ const EventDetails = () => {
 };
 
 export default EventDetails;
+
+
