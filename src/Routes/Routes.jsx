@@ -12,6 +12,7 @@ import EventDetails from "../Pages/EventDetails/EventDetails";
 import UpdateEvent from "../Pages/UpdateEvent/UpdateEvent";
 import ForgetPassword from "../Pages/ForgetPassword/ForgetPassword";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import Loader from "../Components/Loader/Loader";
 
 export const router = createBrowserRouter([
   {
@@ -55,7 +56,8 @@ export const router = createBrowserRouter([
       {
         path:"upcoming",
         loader:()=> fetch("https://social-developments-server.vercel.app/events"),
-        Component:UpcomingEvents
+        Component:UpcomingEvents,
+        hydrateFallbackElement:<Loader></Loader>
       },
       {
         path:"/eventdetails/:id",
@@ -64,7 +66,8 @@ export const router = createBrowserRouter([
       {
         path:"/updateevent/:id",
         Component:UpdateEvent,
-        loader:({params})=> fetch(`https://social-developments-server.vercel.app/events/${params.id}`)
+        loader:({params})=> fetch(`https://social-developments-server.vercel.app/events/${params.id}`),
+        hydrateFallbackElement:<Loader></Loader>
       },
       {
         path:"forgetpassword",
