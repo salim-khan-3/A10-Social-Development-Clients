@@ -50,7 +50,7 @@ const Navbar = () => {
 
   return (
     <div className='shadow-md w-full bg-white dark:text-black'>
-      <nav className="  max-w-7xl mx-auto sticky top-0 z-50">
+      <nav className="container mx-auto sticky top-0 z-50">
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
 

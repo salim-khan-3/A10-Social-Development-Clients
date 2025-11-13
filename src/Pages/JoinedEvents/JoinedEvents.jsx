@@ -173,12 +173,11 @@ const JoinedEvents = () => {
             key={event._id}
             className="bg-white dark:text-black rounded-2xl shadow-md overflow-hidden transition-transform duration-300 hover:scale-[1.02] relative"
           >
-            {/* আপডেট নোটিফিকেশন */}
-            {event.isEventUpdated && (
+            {/* {event.isEventUpdated && (
               <div className="absolute top-2 left-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded-full z-10">
                 Updated
               </div>
-            )}
+            )} */}
             
             <img
               src={event.currentThumbnail || event.thumbnail}

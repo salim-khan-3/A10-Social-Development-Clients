@@ -1,8 +1,7 @@
-import React from 'react';
+import React from "react";
 
 const Gallery = () => {
-
-    const galleryImages = [
+  const galleryImages = [
     "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=500&h=400&fit=crop",
     "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=500&h=400&fit=crop",
     "https://plus.unsplash.com/premium_photo-1664285652180-f70ddda17717?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&q=60&w=500",
@@ -10,13 +9,13 @@ const Gallery = () => {
     "https://images.unsplash.com/photo-1758599668178-d9716bbda9d5?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNvbW11bml0eSUyQ3ZvbHVudGVlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=500",
     "https://plus.unsplash.com/premium_photo-1681140560925-a50f402b8525?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8dHJlZS1wbGFudGF0aW9uJTJDdm9sdW50ZWVyfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=500",
   ];
-    return (
-<section className="py-20">
+  return (
+    <section className="py-20">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-gray-800">
+        <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-shadow-cyan-300">
           Event Gallery
         </h2>
-        <p className="text-center text-gray-600 mb-16 max-w-2xl mx-auto">
+        <p className="text-center text-shadow-cyan-300 mb-16 max-w-2xl mx-auto">
           Real moments from our community-driven social service events
         </p>
 
@@ -37,7 +36,7 @@ const Gallery = () => {
         </div>
       </div>
     </section>
-    );
+  );
 };
 
 export default Gallery;
