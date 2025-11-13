@@ -32,8 +32,8 @@ const JoinedEvents = () => {
         setJoinedEvents(data);
         setLoading(false);
       })
-      .catch((err) => {
-        console.error(err);
+      .catch((error) => {
+        console.error(error);
         toast.error("Failed to fetch joined events");
         setLoading(false);
       });
