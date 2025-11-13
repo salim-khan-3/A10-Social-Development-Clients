@@ -71,7 +71,7 @@ const JoinedEvents = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className=" flex items-center justify-center">
         <p className="text-gray-500 text-lg">Loading your joined events...</p>
       </div>
     );
@@ -79,7 +79,7 @@ const JoinedEvents = () => {
 
   if (!joinedEvents.length) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center">
+      <div className="flex flex-col py-9 items-center justify-center">
         <p className="text-gray-500 text-lg">
           You haven't joined any events yet.
         </p>

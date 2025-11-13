@@ -78,7 +78,7 @@ const Login = () => {
 
   return (
     <div className="container mx-auto">
-      {/* <title>WinterPetCare - Login</title> */}
+      <title>Social-Devlopments-clients - Login</title>
       <div className="hero-content mx-auto flex flex-col py-10">
         <div className="text-center lg:text-left">
           <h1 className="text-5xl font-bold">Login now!</h1>
