@@ -49,7 +49,8 @@ const Navbar = () => {
   if (loading) return null;
 
   return (
-    <nav className="bg-white dark:text-black shadow-md max-w-7xl mx-auto sticky top-0 z-50">
+    <div className='shadow-md w-full'>
+      <nav className="bg-white dark:text-black  max-w-7xl mx-auto sticky top-0 z-50">
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
 
@@ -247,6 +248,7 @@ const Navbar = () => {
         )}
       </div>
     </nav>
+    </div>
   );
 };
 
