@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router";
 
 const EventCard = ({ event }) => {
@@ -19,12 +18,20 @@ const EventCard = ({ event }) => {
         </h3>
         <p className="text-sm text-gray-600 mb-3">{event.location}</p>
 
-        <p className="text-sm font-medium text-gray-700 mb-4">
-          Date: {event.eventDate}
+        <p>
+          {new Date(event.eventDate).toLocaleDateString("en-GB", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          })}
         </p>
+
         <p>{event.createdBy}</p>
 
-        <Link to={`/eventdetails/${event._id}`} className="block w-full text-center bg-emerald-600 text-white py-2 rounded-lg font-semibold hover:bg-emerald-700 transition">
+        <Link
+          to={`/eventdetails/${event._id}`}
+          className="block w-full text-center bg-emerald-600 text-white py-2 rounded-lg font-semibold hover:bg-emerald-700 transition"
+        >
           View Event
         </Link>
       </div>

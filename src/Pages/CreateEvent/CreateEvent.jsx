@@ -27,13 +27,13 @@ const CreateEvent = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
     })
-    .then(res => res.json())
-    .then(data=> {
-      console.log(data)
-       toast.success("Event created successfully!");
-       navigate("/upcoming");
-    })
-     .catch(() => toast.error("Failed to create event"));
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        toast.success("Event created successfully!");
+        navigate("/upcoming");
+      })
+      .catch(() => toast.error("Failed to create event"));
     // console.log("Form Data:", formData);
   };
 
@@ -153,10 +153,9 @@ const CreateEvent = () => {
               <DatePicker
                 selected={selectedDate}
                 onChange={(date) => setSelectedDate(date)}
-                minDate={new Date()}
+                minDate={new Date(new Date().setDate(new Date().getDate() + 1))}
                 placeholderText="Select a Future Date"
                 id="date-picker"
-                // Custom styling for the DatePicker input
                 className="w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-emerald-500 focus:border-emerald-500 transition duration-150 ease-in-out cursor-pointer"
                 required
                 showTimeSelect={false}
@@ -179,5 +178,3 @@ const CreateEvent = () => {
 };
 
 export default CreateEvent;
-
-

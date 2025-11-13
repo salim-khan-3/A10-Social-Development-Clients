@@ -3,6 +3,7 @@ import { Link, Navigate, useNavigate } from "react-router";
 import { AuthContext } from "../../Context/AuthContext";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import Loader from "../../Components/Loader/Loader";
 
 const ManageEvents = () => {
   const { user } = use(AuthContext);
@@ -77,7 +78,7 @@ const ManageEvents = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-xl text-gray-600">Data Loading...</p>
+        <Loader></Loader>
       </div>
     );
   }

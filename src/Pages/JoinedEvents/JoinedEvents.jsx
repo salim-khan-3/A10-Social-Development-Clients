@@ -2,6 +2,7 @@
 import { use, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import toast from "react-hot-toast";
+import Loader from "../../Components/Loader/Loader";
 
 const JoinedEvents = () => {
   const { user } = use(AuthContext);
@@ -72,7 +73,7 @@ const JoinedEvents = () => {
   if (loading) {
     return (
       <div className=" flex items-center justify-center">
-        <p className="text-gray-500 text-lg">Loading your joined events...</p>
+        <Loader></Loader>
       </div>
     );
   }

@@ -2,6 +2,7 @@ import {  useNavigate, useParams } from "react-router";
 import { AuthContext } from "../../Context/AuthContext";
 import toast from "react-hot-toast";
 import { use, useEffect, useState } from "react";
+import Loader from "../../Components/Loader/Loader";
 
 const EventDetails = () => {
   // const data = useLoaderData();
@@ -83,65 +84,73 @@ const EventDetails = () => {
 
 
   if(loading) {
-    return <div>data loading....</div>
+    return <div>
+      <Loader></Loader>
+    </div>
   }
 
   return (
-    <div className="min-h-screen py-10 px-4 md:px-10">
-      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-[1.01]">
-        {/* Thumbnail */}
-        <div className="relative">
-          <img
-            src={data.thumbnail}
-            alt={data.title}
-            className="w-full h-64 md:h-96 object-cover"
-          />
-          {/* Edit Button (top-right corner) */}
-          <button
-            onClick={() => navigate(`/updateevent/${data._id}`)}
-            className="absolute top-4 right-4 bg-yellow-500 hover:bg-yellow-600 text-white text-sm px-4 py-2 rounded-lg shadow-md transition"
-          >
-            Update Event
-          </button>
-        </div>
-
-        {/* Info */}
-        <div className="p-6 md:p-10 space-y-4">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
-            {data.title}
-          </h1>
-
-          <p className="text-gray-700 md:text-lg leading-relaxed">
-            {data.description}
-          </p>
-
-          {/* Tags */}
-          <div className="flex flex-wrap gap-3 mt-4">
-            <span className="px-4 py-1 rounded-full bg-emerald-100 text-emerald-800 font-medium">
-              {data.eventType}
-            </span>
-            <span className="px-4 py-1 rounded-full bg-gray-100 text-gray-700 font-medium">
-              {data.location}
-            </span>
-            <span className="px-4 py-1 rounded-full bg-blue-100 text-blue-800 font-medium">
-              {formattedDate}
-            </span>
-          </div>
-
-          <p className="text-sm text-gray-500 mt-3">
-            Created by: <span className="font-medium">{data.createdBy}</span>
-          </p>
-
-          {/* Join Event Button */}
-          <button
-            onClick={handleJoinEvent}
-            className="bg-emerald-600 px-8 py-4 rounded-full text-white hover:bg-emerald-700"
-          >
-            Join Event
-          </button>
-        </div>
+<div className="min-h-screen py-10 px-4 md:px-10 bg-gradient-to-br from-emerald-50 via-white to-emerald-100">
+  <div className="max-w-5xl mx-auto flex flex-col md:flex-row bg-white dark:bg-gray-900 rounded-3xl shadow-2xl overflow-hidden transform transition-all duration-500 hover:shadow-emerald-200 hover:-translate-y-1">
+    
+    {/* Thumbnail */}
+    <div className="md:w-1/2 w-full relative">
+      <img
+        src={data.thumbnail}
+        alt={data.title}
+        className="w-full h-80 md:h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent md:hidden"></div>
+      <div className="absolute bottom-3 left-4 text-white md:hidden">
+        <h2 className="text-2xl font-bold drop-shadow-md">{data.title}</h2>
       </div>
     </div>
+
+    {/* Info Section */}
+    <div className="flex-1 p-8 md:p-12 flex flex-col justify-between">
+      <div>
+        <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-4 border-b-2 border-emerald-500 inline-block pb-1">
+          {data.title}
+        </h1>
+
+        <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed mb-6">
+          {data.description}
+        </p>
+
+        {/* Tags */}
+        <div className="flex flex-wrap gap-3 mb-6">
+          <span className="px-4 py-1.5 rounded-full bg-emerald-100 text-emerald-800 font-medium text-sm shadow-sm">
+            {data.eventType}
+          </span>
+          <span className="px-4 py-1.5 rounded-full bg-gray-100 text-gray-700 font-medium text-sm shadow-sm">
+            📍 {data.location}
+          </span>
+          <span className="px-4 py-1.5 rounded-full bg-blue-100 text-blue-800 font-medium text-sm shadow-sm">
+            📅 {formattedDate}
+          </span>
+        </div>
+
+        <p className="text-sm text-gray-500 dark:text-gray-400 italic">
+          Created by:{" "}
+          <span className="font-medium text-emerald-700 dark:text-emerald-400">
+            {data.createdBy}
+          </span>
+        </p>
+      </div>
+
+      {/* Join Button */}
+      <div className="mt-8">
+        <button
+          onClick={handleJoinEvent}
+          className="w-full md:w-auto bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-emerald-300 transition-all duration-300"
+        >
+          🌱 Join Event
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
   );
 };
 

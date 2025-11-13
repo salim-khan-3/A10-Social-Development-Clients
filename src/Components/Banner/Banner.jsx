@@ -14,14 +14,14 @@ const slides = [
     desc: "Participate in cleanup drives, tree plantations, and donation events.",
     img: "https://images.unsplash.com/photo-1758599668178-d9716bbda9d5?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNvbW11bml0eSUyQ3ZvbHVudGVlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=500",
     btnText: "Explore Events",
-    btnLink: "/events/upcoming",
+    btnLink: "/upcoming",
   },
   {
     title: "Make a Difference in Your Area",
     desc: "Create or join social events near your locality to help society.",
     img: "https://plus.unsplash.com/premium_photo-1681140560925-a50f402b8525?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8dHJlZS1wbGFudGF0aW9uJTJDdm9sdW50ZWVyfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=500",
     btnText: "Create Event",
-    btnLink: "/create-event",
+    btnLink: "/create",
   },
   {
     title: "Be the Change You Want to See",

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import EventCard from "../../Components/EventCard/EventCard";
 import { useLoaderData } from "react-router";
 import { FaSearch } from "react-icons/fa";
+import Loader from "../../Components/Loader/Loader";
 
 const UpcomingEvents = () => {
   const events = useLoaderData();
@@ -16,7 +17,7 @@ const UpcomingEvents = () => {
     return data.filter((event) => {
       const eventDate = new Date(event.eventDate);
       eventDate.setHours(0, 0, 0, 0);
-      return eventDate >= today;
+      return eventDate > today;
     });
   };
 
@@ -26,41 +27,58 @@ const UpcomingEvents = () => {
   }, [events]);
 
   // search function
-  const handleSearch = (e) => {
-    e.preventDefault();
-    const search_text = e.target.search.value.trim();
-    if (!search_text) return;
+const handleSearch = (e) => {
+  e.preventDefault();
+  const searchText = e.target.search.value.trim();
 
-    setLoading(true);
-    fetch(`https://social-developments-server.vercel.app/search?search=${search_text}`)
-      .then((res) => res.json())
-      .then((response) => {
-        const resultArray = response.success ? response.data : [];
-        setUpcomingEvents(filterUpcoming(resultArray));
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  };
+  setLoading(true);
+
+  if (!searchText) {
+    // input is empty → show all upcoming events
+    setUpcomingEvents(filterUpcoming(events));
+    setLoading(false);
+    return;
+  }
+
+  // otherwise, do the search API call
+  fetch(`https://social-developments-server.vercel.app/search?search=${searchText}`)
+    .then((res) => res.json())
+    .then((response) => {
+      const resultArray = response.success ? response.data : [];
+      setUpcomingEvents(filterUpcoming(resultArray));
+      setLoading(false);
+    })
+    .catch(() => setLoading(false));
+};
+
 
   // filter function
-  const handleFilter = (e) => {
-    e.preventDefault();
-    const eventType = e.target.eventType.value;
+const handleFilter = (e) => {
+  e.preventDefault();
+  const eventType = e.target.eventType.value;
 
-    setLoading(true);
-    fetch(`https://social-developments-server.vercel.app/filter?eventType=${eventType}`)
-      .then((res) => res.json())
-      .then((response) => {
-        const resultArray = response.success ? response.data : [];
-        setUpcomingEvents(filterUpcoming(resultArray));
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  };
+  setLoading(true);
+
+  if (!eventType) {
+    // if "All Types" is selected, just show all upcoming events
+    setUpcomingEvents(filterUpcoming(events));
+    setLoading(false);
+    return;
+  }
+
+  fetch(`https://social-developments-server.vercel.app/filter?eventType=${eventType}`)
+    .then((res) => res.json())
+    .then((response) => {
+      const resultArray = response.success ? response.data : [];
+      setUpcomingEvents(filterUpcoming(resultArray));
+      setLoading(false);
+    })
+    .catch(() => setLoading(false));
+};
 
   
   if (loading) {
-    return <div>spiner...</div>;
+    return <Loader></Loader>;
   }
   return (
     <div>
@@ -76,7 +94,7 @@ const UpcomingEvents = () => {
           <input
             type="text"
             name="search"
-            placeholder="Search events..."
+            placeholder="Search by events name..."
             className="flex-1 bg-transparent outline-none text-gray-800 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
           />
           <button
