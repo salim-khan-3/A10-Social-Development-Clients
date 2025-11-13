@@ -59,7 +59,7 @@ const CreateEvent = () => {
                 id="title"
                 placeholder="A catchy name for your event..."
                 required
-                className="w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-emerald-500 focus:border-emerald-500 transition duration-150 ease-in-out"
+                className="w-full px-5 py-3 text-black border border-gray-300 rounded-xl shadow-sm focus:ring-emerald-500 focus:border-emerald-500 transition duration-150 ease-in-out"
               />
             </div>
 
@@ -77,7 +77,7 @@ const CreateEvent = () => {
                 placeholder="Explain what your event is about and its goal."
                 required
                 rows="5"
-                className="w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-emerald-500 focus:border-emerald-500 transition duration-150 ease-in-out resize-none"
+                className="w-full px-5 py-3 border text-black border-gray-300 rounded-xl shadow-sm focus:ring-emerald-500 focus:border-emerald-500 transition duration-150 ease-in-out resize-none"
               />
             </div>
 
@@ -94,7 +94,7 @@ const CreateEvent = () => {
                 <select
                   name="type"
                   id="type"
-                  className="w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-emerald-500 focus:border-emerald-500 appearance-none bg-white transition duration-150 ease-in-out"
+                  className="w-full px-5 py-3 border text-black border-gray-300 rounded-xl shadow-sm focus:ring-emerald-500 focus:border-emerald-500 appearance-none bg-white transition duration-150 ease-in-out"
                 >
                   <option value="Cleanup">Cleanup</option>
                   <option value="Plantation">Plantation</option>
@@ -118,7 +118,7 @@ const CreateEvent = () => {
                   id="location"
                   placeholder="e.g. Mirpur 10, Dhaka"
                   required
-                  className="w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-emerald-500 focus:border-emerald-500 transition duration-150 ease-in-out"
+                  className="w-full px-5 py-3 text-black border border-gray-300 rounded-xl shadow-sm focus:ring-emerald-500 focus:border-emerald-500 transition duration-150 ease-in-out"
                 />
               </div>
             </div>
@@ -137,7 +137,7 @@ const CreateEvent = () => {
                 id="thumbnail"
                 placeholder="https://example.com/image.jpg"
                 required
-                className="w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-emerald-500 focus:border-emerald-500 transition duration-150 ease-in-out"
+                className="w-full px-5 text-black py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-emerald-500 focus:border-emerald-500 transition duration-150 ease-in-out"
               />
             </div>
 
@@ -155,7 +155,7 @@ const CreateEvent = () => {
                 minDate={new Date(new Date().setDate(new Date().getDate() + 1))}
                 placeholderText="Select a Future Date"
                 id="date-picker"
-                className="w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-emerald-500 focus:border-emerald-500 transition duration-150 ease-in-out cursor-pointer"
+                className="w-full px-5 py-3 text-black border border-gray-300 rounded-xl shadow-sm focus:ring-emerald-500 focus:border-emerald-500 transition duration-150 ease-in-out cursor-pointer"
                 required
                 showTimeSelect={false}
                 dateFormat="dd/MM/yyyy"

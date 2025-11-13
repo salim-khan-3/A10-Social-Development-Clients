@@ -58,7 +58,7 @@ const UpdateEvent = () => {
               name="title"
               placeholder="Event Title"
               defaultValue={data.title}
-              className="w-full border px-4 py-2 rounded-lg"
+              className="w-full border px-4 text-black py-2 rounded-lg"
               required
             />
           </div>
@@ -75,7 +75,7 @@ const UpdateEvent = () => {
               name="description"
               placeholder="Event Description"
               defaultValue={data.description}
-              className="w-full border px-4 py-2 rounded-lg"
+              className="w-full text-black border px-4 py-2 rounded-lg"
               rows={4}
               required
             />
@@ -95,7 +95,7 @@ const UpdateEvent = () => {
                 name="eventType"
                 defaultValue={data.eventType}
                 id="type"
-                className="w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-emerald-500 focus:border-emerald-500 appearance-none bg-white transition duration-150 ease-in-out"
+                className="w-full px-5 py-3 border text-black border-gray-300 rounded-xl shadow-sm focus:ring-emerald-500 focus:border-emerald-500 appearance-none bg-white transition duration-150 ease-in-out"
               >
                 <option value="Cleanup">Cleanup</option>
                 <option value="Plantation">Plantation</option>
@@ -118,7 +118,7 @@ const UpdateEvent = () => {
                 name="location"
                 placeholder="Location"
                 defaultValue={data.location}
-                className="w-full border px-4 py-2 rounded-lg"
+                className="w-full text-black border px-4 py-2 rounded-lg"
                 required
               />
             </div>
@@ -137,7 +137,7 @@ const UpdateEvent = () => {
               name="thumbnail"
               placeholder="Thumbnail URL"
               defaultValue={data.thumbnail}
-              className="w-full border px-4 py-2 rounded-lg"
+              className="w-full border text-black px-4 py-2 rounded-lg"
             />
           </div>
 
@@ -153,7 +153,7 @@ const UpdateEvent = () => {
               type="date"
               name="eventDate"
               defaultValue={new Date(data.eventDate).toISOString().slice(0, 10)}
-              className="w-full border px-4 py-2 rounded-lg"
+              className="w-full border text-black px-4 py-2 rounded-lg"
               required
             />
           </div>
