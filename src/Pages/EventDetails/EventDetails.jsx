@@ -1,15 +1,27 @@
-// import toast from "react-hot-toast";
-import { useLoaderData, useNavigate } from "react-router";
+import {  useNavigate, useParams } from "react-router";
 import { AuthContext } from "../../Context/AuthContext";
 import toast from "react-hot-toast";
-import { use } from "react";
+import { use, useEffect, useState } from "react";
 
 const EventDetails = () => {
-  const data = useLoaderData();
+  // const data = useLoaderData();
   const navigate = useNavigate();
   const { user } = use(AuthContext);
+  const { id } = useParams()
+   const [data, setData] = useState({});
+   const [loading,setLoading] = useState(true);
 
-  console.log("EventDetails data:", data);
+  useEffect(()=>{
+
+
+    fetch(`https://social-developments-server.vercel.app/events/${id}`)
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+          setData(data);
+          setLoading(false)
+        })
+  },[id,user])
 
   const handleJoinEvent = async () => {
     if (!user) {
@@ -30,7 +42,11 @@ const EventDetails = () => {
     };
 
     try {
-      const res = await fetch(`http://localhost:3000/join_event/${user.email}`);
+      const res = await fetch(`https://social-developments-server.vercel.app/join_event/${user.email}`, {
+          headers: {
+            authorization: `Bearer ${user.accessToken}`
+          }
+        });
       const joinedEvents = await res.json();
 
       const alreadyJoined = joinedEvents.some(
@@ -42,7 +58,7 @@ const EventDetails = () => {
         return;
       }
 
-      const joinRes = await fetch("http://localhost:3000/join_event", {
+      const joinRes = await fetch("https://social-developments-server.vercel.app/join_event", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(joinData),
@@ -64,6 +80,11 @@ const EventDetails = () => {
     month: "long",
     year: "numeric",
   });
+
+
+  if(loading) {
+    return <div>data loading....</div>
+  }
 
   return (
     <div className="min-h-screen py-10 px-4 md:px-10">

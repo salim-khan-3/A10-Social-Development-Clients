@@ -5,7 +5,7 @@ import Features from '../../Components/Features/Features';
 
 const Home = () => {
     return (
-        <div className='bg-amber-50 dark:text-black'>
+        <div className='bg-white dark:text-black'>
             <Banner></Banner>
             <Features></Features>
             <Gallery></Gallery>

@@ -9,24 +9,65 @@ const JoinedEvents = () => {
   const [loading, setLoading] = useState(true);
 
   // console.log(user);
-  useEffect(() => {
-    if (!user) return;
+  // useEffect(() => {
+  //   if (!user) return;
 
-    fetch(`http://localhost:3000/join_event/${user.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const sortedData = data.sort(
-          (a, b) => new Date(a.eventDate) - new Date(b.eventDate)
-        );
-        setJoinedEvents(sortedData);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error("Failed to fetch joined events");
-        setLoading(false);
-      });
-  }, [user]);
+  //   fetch(`http://localhost:3000/join_event/${user.email}`, {
+  //         headers: {
+  //           authorization: `Bearer ${user.accessToken}`
+  //         }
+  //       })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       const sortedData = data.sort(
+  //         (a, b) => new Date(a.eventDate) - new Date(b.eventDate)
+  //       );
+  //       setJoinedEvents(sortedData);
+  //       setLoading(false);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //       toast.error("Failed to fetch joined events");
+  //       setLoading(false);
+  //     });
+  // }, [user]);
+
+
+
+  useEffect(() => {
+  if (!user) return;
+
+  // fetch joined events
+  fetch(`https://social-developments-server.vercel.app/join_event/${user.email}`, {
+    headers: {
+      authorization: `Bearer ${user.accessToken}`,
+    },
+  })
+    .then(res => res.json())
+    .then(async (joinedData) => {
+      // fetch all events
+      const eventsRes = await fetch(`https://social-developments-server.vercel.app/events`);
+      const allEvents = await eventsRes.json();
+
+      // filter joined events that still exist
+      const filteredJoined = joinedData.filter(j =>
+        allEvents.some(e => e._id === j.eventId)
+      );
+
+      const sortedData = filteredJoined.sort(
+        (a, b) => new Date(a.eventDate) - new Date(b.eventDate)
+      );
+
+      setJoinedEvents(sortedData);
+      setLoading(false);
+    })
+    .catch(err => {
+      console.error(err);
+      toast.error("Failed to fetch joined events");
+      setLoading(false);
+    });
+}, [user]);
+
 
   if (loading) {
     return (
@@ -48,7 +89,7 @@ const JoinedEvents = () => {
 
   return (
     <div className="  py-10 md:py-20 px-4 md:px-10">
-      <h1 className="text-2xl font-bold text-center mb-6  dark:text-white text-gray-900">
+      <h1 className="text-2xl font-bold text-center mb-6  bg-white dark:text-black">
         My Joined Events
       </h1>
 

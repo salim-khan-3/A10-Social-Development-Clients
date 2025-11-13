@@ -22,7 +22,7 @@ const CreateEvent = () => {
       createdBy: user.email,
     };
 
-    fetch("http://localhost:3000/events", {
+    fetch("https://social-developments-server.vercel.app/events", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
@@ -179,3 +179,5 @@ const CreateEvent = () => {
 };
 
 export default CreateEvent;
+
+

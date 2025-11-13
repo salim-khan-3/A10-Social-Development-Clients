@@ -4,7 +4,7 @@ import { Link } from "react-router";
 const EventCard = ({ event }) => {
   console.log(event.eventDate);
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+    <div className="bg-white dark:text-black rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
       <img src={event.thumbnail} alt="" className="w-full h-48 object-cover" />
       <div className="p-5">
         <div className="flex items-center gap-2 mb-2">
@@ -22,6 +22,7 @@ const EventCard = ({ event }) => {
         <p className="text-sm font-medium text-gray-700 mb-4">
           Date: {event.eventDate}
         </p>
+        <p>{event.createdBy}</p>
 
         <Link to={`/eventdetails/${event._id}`} className="block w-full text-center bg-emerald-600 text-white py-2 rounded-lg font-semibold hover:bg-emerald-700 transition">
           View Event

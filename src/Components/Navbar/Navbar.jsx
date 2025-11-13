@@ -140,7 +140,7 @@ const Navbar = () => {
                         Joined Events
                       </Link>
 
-                      <input onChange={(e)=> handleTheme(e.target.checked)} defaultChecked={localStorage.getItem("theme") === "dark"} type="checkbox" className='toggle' />
+                      {/* <input onChange={(e)=> handleTheme(e.target.checked)} defaultChecked={localStorage.getItem("theme") === "dark"} type="checkbox" className='toggle' /> */}
                     </div>
                   )}
                 </>
@@ -161,6 +161,7 @@ const Navbar = () => {
             >
               {isMobileMenuOpen ? <FaTimes className="w-6 h-6" /> : <FaBars className="w-6 h-6 block" />}
             </button>
+             <input onChange={(e)=> handleTheme(e.target.checked)} defaultChecked={localStorage.getItem("theme") === "dark"} type="checkbox" className='toggle' />
           </div>
         </div>
 

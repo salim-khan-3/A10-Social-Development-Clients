@@ -2,8 +2,8 @@ import toast from "react-hot-toast";
 import { useLoaderData } from "react-router";
 
 const UpdateEvent = () => {
-  const data = useLoaderData()
-  console.log(data);
+  const data = useLoaderData();
+  // console.log(data);
   // const { user } = use(AuthContext);
   // const [selectedDate, setSelectedDate] = useState(null);
 
@@ -15,10 +15,12 @@ const UpdateEvent = () => {
       eventType: e.target.eventType.value,
       thumbnail: e.target.thumbnail.value,
       location: e.target.location.value,
-      eventDate:e.target.eventDate.value ,
+      eventDate: e.target.eventDate.value,
     };
 
-    fetch(`http://localhost:3000/events/${data._id}`, {
+    console.log(formData);
+
+    fetch(`https://social-developments-server.vercel.app/events/${data._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
@@ -26,12 +28,10 @@ const UpdateEvent = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-         toast.success("Event updated successfully!");
+        toast.success("Event updated successfully!");
       })
       .catch(() => toast.error("Failed to update event"));
   };
-
-
 
   return (
     <div className="min-h-screen py-10 px-4 md:px-8">
@@ -51,7 +51,7 @@ const UpdateEvent = () => {
               type="text"
               name="title"
               placeholder="Event Title"
-              defaultValue={data.title} 
+              defaultValue={data.title}
               className="w-full border px-4 py-2 rounded-lg"
               required
             />
@@ -68,7 +68,7 @@ const UpdateEvent = () => {
             <textarea
               name="description"
               placeholder="Event Description"
-              defaultValue={data.description} 
+              defaultValue={data.description}
               className="w-full border px-4 py-2 rounded-lg"
               rows={4}
               required
@@ -79,25 +79,25 @@ const UpdateEvent = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Event Type Select */}
             <div>
-                <label
-                  htmlFor="type"
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  Event Type
-                </label>
-                <select
-                  name="eventType"
-                  defaultValue={data.eventType}
-                  id="type"
-                  className="w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-emerald-500 focus:border-emerald-500 appearance-none bg-white transition duration-150 ease-in-out"
-                >
-                  <option value="Cleanup">Cleanup</option>
-                  <option value="Plantation">Plantation</option>
-                  <option value="Donation">Donation</option>
-                  <option value="Education">Education</option>
-                  <option value="Health Camp">Health Camp</option>
-                </select>
-              </div>
+              <label
+                htmlFor="type"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Event Type
+              </label>
+              <select
+                name="eventType"
+                defaultValue={data.eventType}
+                id="type"
+                className="w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-emerald-500 focus:border-emerald-500 appearance-none bg-white transition duration-150 ease-in-out"
+              >
+                <option value="Cleanup">Cleanup</option>
+                <option value="Plantation">Plantation</option>
+                <option value="Donation">Donation</option>
+                <option value="Education">Education</option>
+                <option value="Health Camp">Health Camp</option>
+              </select>
+            </div>
 
             {/* Location Input */}
             <div>
@@ -146,7 +146,7 @@ const UpdateEvent = () => {
             <input
               type="date"
               name="eventDate"
-              defaultValue={data.eventDate}
+              defaultValue={new Date(data.eventDate).toISOString().slice(0, 10)}
               className="w-full border px-4 py-2 rounded-lg"
               required
             />

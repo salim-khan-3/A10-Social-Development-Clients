@@ -11,11 +11,13 @@ import UpcomingEvents from "../Pages/UpcomingEvents/UpcomingEvents";
 import EventDetails from "../Pages/EventDetails/EventDetails";
 import UpdateEvent from "../Pages/UpdateEvent/UpdateEvent";
 import ForgetPassword from "../Pages/ForgetPassword/ForgetPassword";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayouts></MainLayouts>,
+    errorElement:<ErrorPage></ErrorPage>,
     children:[
       {
         index:true,
@@ -52,18 +54,17 @@ export const router = createBrowserRouter([
       },
       {
         path:"upcoming",
-        loader:()=> fetch("http://localhost:3000/events"),
+        loader:()=> fetch("https://social-developments-server.vercel.app/events"),
         Component:UpcomingEvents
       },
       {
         path:"/eventdetails/:id",
-        loader:({params})=> fetch(`http://localhost:3000/events/${params.id}`),
         Component:EventDetails
       },
       {
         path:"/updateevent/:id",
         Component:UpdateEvent,
-        loader:({params})=> fetch(`http://localhost:3000/events/${params.id}`)
+        loader:({params})=> fetch(`https://social-developments-server.vercel.app/events/${params.id}`)
       },
       {
         path:"forgetpassword",

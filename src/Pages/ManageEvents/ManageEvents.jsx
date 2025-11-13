@@ -2,6 +2,7 @@ import React, { use, useEffect, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router";
 import { AuthContext } from "../../Context/AuthContext";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const ManageEvents = () => {
   const { user } = use(AuthContext);
@@ -12,7 +13,11 @@ const ManageEvents = () => {
   useEffect(() => {
     if (!user?.email) return;
 
-    fetch(`http://localhost:3000/events/byemail/${user.email}`)
+    fetch(`https://social-developments-server.vercel.app/events/byemail/${user.email}`, {
+      headers: {
+        authorization: `Bearer ${user.accessToken}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         setMyEvents(data);
@@ -25,6 +30,49 @@ const ManageEvents = () => {
       });
   }, [user]);
 
+  // ✅ handle delete event with SweetAlert2
+  const handleDelete = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This event will be permanently deleted!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+      background: "#fff",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await fetch(`https://social-developments-server.vercel.app/events/${id}`, {
+            method: "DELETE",
+            headers: {
+              authorization: `Bearer ${user.accessToken}`,
+            },
+          });
+
+          const data = await res.json();
+
+          if (data.success) {
+            // Remove deleted event from state
+            setMyEvents((prev) => prev.filter((event) => event._id !== id));
+
+            Swal.fire("Deleted!", "The event has been deleted.", "success");
+          } else {
+            Swal.fire(
+              "Failed!",
+              data.message || "Could not delete event.",
+              "error"
+            );
+          }
+        } catch (error) {
+          console.error("Delete error:", error);
+          Swal.fire("Error!", "Something went wrong while deleting.", "error");
+        }
+      }
+    });
+  };
+
   // loading state
   if (loading) {
     return (
@@ -36,7 +84,7 @@ const ManageEvents = () => {
 
   if (myEvents.length === 0) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
+      <div className=" flex flex-col items-center justify-center py-20">
         <p className="text-2xl font-semibold text-gray-700 mb-4">
           You haven't created any event yet.
         </p>
@@ -54,15 +102,14 @@ const ManageEvents = () => {
     <div className="min-h-screen  py-10 px-4 md:px-8">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl md:text-4xl font-bold text-center mb-10 text-gray-900 dark:text-white">
-  My created events
-</h1>
-
+          My created events
+        </h1>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {myEvents.map((event) => (
             <div
               key={event._id}
-              className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300"
+              className="bg-white dark:text-black rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300"
             >
               {/* Thumbnail */}
               <div className="relative">
@@ -84,6 +131,7 @@ const ManageEvents = () => {
                 <p className="text-sm text-gray-600 line-clamp-2">
                   {event.description}
                 </p>
+                <p>{event.createdBy}</p>
 
                 <div className="flex items-center gap-1 text-xs text-gray-500">
                   <span className="line-clamp-1">{event.location}</span>
@@ -115,13 +163,17 @@ const ManageEvents = () => {
 
                 {/* Action Buttons */}
                 <div className="flex gap-2 mt-4">
-                  <Link to={`/updateevent/${event._id}`}
+                  <Link
+                    to={`/updateevent/${event._id}`}
                     // onClick={() => navigate(``)}
                     className="flex-1 text-center cursor-pointer bg-blue-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition"
                   >
                     Update
                   </Link>
-                  <button className="flex-1 bg-red-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition">
+                  <button
+                    onClick={() => handleDelete(event._id)}
+                    className="flex-1 bg-red-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition"
+                  >
                     Delete
                   </button>
                 </div>
