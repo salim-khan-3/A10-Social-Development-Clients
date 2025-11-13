@@ -1,14 +1,12 @@
 import { use } from "react";
 import toast from "react-hot-toast";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import { AuthContext } from "../../Context/AuthContext";
 
 const UpdateEvent = () => {
   const {user} = use(AuthContext)
   const data = useLoaderData();
-  // console.log(data);
-  // const { user } = use(AuthContext);
-  // const [selectedDate, setSelectedDate] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,6 +33,7 @@ const UpdateEvent = () => {
       .then((data) => {
         console.log(data);
         toast.success("Event updated successfully!");
+        navigate("/manage");
       })
       .catch(() => toast.error("Failed to update event"));
   };
