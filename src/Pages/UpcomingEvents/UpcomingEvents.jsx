@@ -27,59 +27,58 @@ const UpcomingEvents = () => {
   }, [events]);
 
   // search function
-const handleSearch = (e) => {
-  e.preventDefault();
-  const searchText = e.target.search.value.trim();
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const searchText = e.target.search.value.trim();
 
-  setLoading(true);
+    setLoading(true);
 
-  if (!searchText) {
-    // input is empty → show all upcoming events
-    setUpcomingEvents(filterUpcoming(events));
-    setLoading(false);
-    return;
-  }
-
-  // otherwise, do the search API call
-  fetch(`https://social-developments-server.vercel.app/search?search=${searchText}`)
-    .then((res) => res.json())
-    .then((response) => {
-      const resultArray = response.success ? response.data : [];
-      setUpcomingEvents(filterUpcoming(resultArray));
+    if (!searchText) {
+      // input is empty → show all upcoming events
+      setUpcomingEvents(filterUpcoming(events));
       setLoading(false);
-    })
-    .catch(() => setLoading(false));
-};
+      return;
+    }
 
+    // otherwise, do the search API call
+    fetch(`https://social-developments-server.vercel.app/search?search=${searchText}`)
+      .then((res) => res.json())
+      .then((response) => {
+        const resultArray = response.success ? response.data : [];
+        setUpcomingEvents(filterUpcoming(resultArray));
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  };
 
   // filter function
-const handleFilter = (e) => {
-  e.preventDefault();
-  const eventType = e.target.eventType.value;
+  const handleFilter = (e) => {
+    e.preventDefault();
+    const eventType = e.target.eventType.value;
 
-  setLoading(true);
+    setLoading(true);
 
-  if (!eventType) {
-    // if "All Types" is selected, just show all upcoming events
-    setUpcomingEvents(filterUpcoming(events));
-    setLoading(false);
-    return;
-  }
-
-  fetch(`https://social-developments-server.vercel.app/filter?eventType=${eventType}`)
-    .then((res) => res.json())
-    .then((response) => {
-      const resultArray = response.success ? response.data : [];
-      setUpcomingEvents(filterUpcoming(resultArray));
+    if (!eventType) {
+      // if "All Types" is selected, just show all upcoming events
+      setUpcomingEvents(filterUpcoming(events));
       setLoading(false);
-    })
-    .catch(() => setLoading(false));
-};
+      return;
+    }
 
-  
+    fetch(`https://social-developments-server.vercel.app/filter?eventType=${eventType}`)
+      .then((res) => res.json())
+      .then((response) => {
+        const resultArray = response.success ? response.data : [];
+        setUpcomingEvents(filterUpcoming(resultArray));
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  };
+
   if (loading) {
-    return <Loader></Loader>;
+    return <Loader />;
   }
+
   return (
     <div>
       <h1 className="text-center text-5xl font-bold my-10">Upcoming Events</h1>
@@ -112,7 +111,7 @@ const handleFilter = (e) => {
         >
           <select
             name="eventType"
-            className="flex-1 bg-transparent border-none outline-none text-white"
+            className="flex-1 bg-transparent border-none outline-none text-cyan-300"
           >
             <option className="text-gray-800" value="">
               All Types
@@ -143,10 +142,16 @@ const handleFilter = (e) => {
         </form>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 px-4 py-10 lg:px-0 ">
-        {upcomingEvents.map((event) => (
-          <EventCard event={event} key={event._id}></EventCard>
-        ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 px-4 py-10 lg:px-0">
+        {upcomingEvents.length > 0 ? (
+          upcomingEvents.map((event) => (
+            <EventCard event={event} key={event._id} />
+          ))
+        ) : (
+          <p className="text-center text-xl text-gray-500 col-span-full">
+            No events found 😔
+          </p>
+        )}
       </div>
     </div>
   );

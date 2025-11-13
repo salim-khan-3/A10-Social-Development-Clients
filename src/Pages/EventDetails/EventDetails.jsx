@@ -18,7 +18,6 @@ const EventDetails = () => {
     fetch(`https://social-developments-server.vercel.app/events/${id}`)
         .then(res => res.json())
         .then(data => {
-          console.log(data);
           setData(data);
           setLoading(false)
         })

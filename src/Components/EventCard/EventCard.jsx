@@ -4,15 +4,18 @@ import { motion } from "framer-motion";
 const EventCard = ({ event }) => {
   return (
     <motion.div
-      className="bg-white dark:text-black rounded-xl shadow-md overflow-hidden"
+      className="bg-white dark:bg-gray-800 dark:text-white rounded-xl shadow-md overflow-hidden"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ scale: 1.03, boxShadow: "0px 15px 25px rgba(0, 0, 0, 0.2)" }}
+      whileHover={{ 
+        scale: 1.03, 
+        boxShadow: "0px 15px 25px rgba(0, 0, 0, 0.2)" 
+      }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <motion.img
         src={event.thumbnail}
-        alt=""
+        alt={event.title || "Event image"}
         className="w-full h-48 object-cover"
         whileHover={{ scale: 1.05 }}
         transition={{ duration: 0.5 }}
@@ -26,15 +29,19 @@ const EventCard = ({ event }) => {
           >
             {event.eventType}
           </motion.span>
-          <span className="text-xs text-gray-500">{event.location}</span>
+          <span className="text-xs text-gray-500 dark:text-gray-400">
+            {event.location}
+          </span>
         </div>
 
-        <h3 className="text-xl font-bold text-gray-800 mb-1 line-clamp-2">
+        <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-1 line-clamp-2">
           {event.title}
         </h3>
-        <p className="text-sm text-gray-600 mb-3">{event.location}</p>
+        <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
+          {event.location}
+        </p>
 
-        <p>
+        <p className="text-gray-800 dark:text-gray-200">
           {new Date(event.eventDate).toLocaleDateString("en-GB", {
             day: "numeric",
             month: "long",
@@ -42,11 +49,13 @@ const EventCard = ({ event }) => {
           })}
         </p>
 
-        <p className="my-5">{event.createdBy}</p>
+        <p className="my-5 text-gray-800 dark:text-gray-200">
+          Created By: {event.createdBy}
+        </p>
 
         <Link
           to={`/eventdetails/${event._id}`}
-          className="block w-full text-center bg-emerald-600 text-white py-2 rounded-lg font-semibold hover:bg-emerald-700 transition"
+          className="block w-full text-center bg-emerald-600 text-white py-2 rounded-lg font-semibold hover:bg-emerald-700 transition-colors"
         >
           View Event
         </Link>

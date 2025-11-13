@@ -34,7 +34,6 @@ const CreateEvent = () => {
         navigate("/upcoming");
       })
       .catch(() => toast.error("Failed to create event"));
-    // console.log("Form Data:", formData);
   };
 
   return (

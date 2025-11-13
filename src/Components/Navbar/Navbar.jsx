@@ -160,7 +160,7 @@ const Navbar = () => {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="md:hidden p-2 rounded-md hover:bg-gray-100"
             >
-              {isMobileMenuOpen ? <FaTimes className="w-6 h-6" /> : <FaBars className="w-6 h-6 block" />}
+              {isMobileMenuOpen ? <FaTimes className="w-6 h-6 text-cyan-400" /> : <FaBars className="w-6 text-cyan-400 h-6 block" />}
             </button>
              <input onChange={(e)=> handleTheme(e.target.checked)} defaultChecked={localStorage.getItem("theme") === "dark"} type="checkbox" className='toggle' />
           </div>
